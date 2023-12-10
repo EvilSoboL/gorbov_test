@@ -28,13 +28,13 @@ class DataBaseHandler:
             connection.commit()
         return result
 
-    def insert_result(self, user_id, date, first_part, second_part, errors):
+    def insert_result(self, user_id, date, first_part, second_part, errors, switching):
         with sqlite3.connect(self.db_path) as connection:
             cursor = connection.cursor()
             cursor.execute('''
                 INSERT INTO "results" (user_id, date, first_part, second_part, errors)
-                VALUES (?, ?, ?, ?, ?)
-            ''', (user_id, date, first_part, second_part, errors))
+                VALUES (?, ?, ?, ?, ?, ?)
+            ''', (user_id, date, first_part, second_part, errors, switching))
             connection.commit()
 
     def get_results(self, user_id):
@@ -49,6 +49,3 @@ class DataBaseHandler:
             result = cursor.fetchall()
             connection.commit()
         return result
-
-#db = DataBaseHandler()
-#print(db.get_results(2))

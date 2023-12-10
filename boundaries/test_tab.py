@@ -136,11 +136,6 @@ class TestTab(QWidget):
 
         elif flag == "reset":
             self.errors = 0
-        '''
-        elif flag == "first_exec":
-            self.start_button.setEnabled(True)
-        '''
-
 
     def shuffle_cells(self):
         """Перемешивание элементов теста"""
@@ -229,17 +224,17 @@ class TestTab(QWidget):
                 self.third_part = False
                 self.logic_switch("stop")
 
-                #profile = open(utility.ROOT_DIR + f"/data/{self.current_aplicant}.data", "a+")
                 date = datetime.now().date()
+                switching = self.second_part_time - self.first_part_time
 
                 self.result.save_result(
                     user.id,
                     date,
                     self.first_part_time,
                     self.second_part_time,
-                    self.errors
+                    self.errors,
+                    switching
                 )
-                #profile.write(f"{datetime.now().date()}\n{self.second_part_time - self.first_part_time}\n{self.errors-2}\n")
                 self.logic_switch("reset")
 
     def show_time(self):

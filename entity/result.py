@@ -10,7 +10,7 @@ class Result:
 
         self.database = DataBaseHandler()
 
-    def save_result(self, user_id, date, first_part_time, second_part_time, errors):
+    def save_result(self, user_id, date, first_part_time, second_part_time, errors, switching):
         self.date = date
         self.first_part_time = first_part_time
         self.second_part_time = second_part_time
@@ -21,7 +21,8 @@ class Result:
             date,
             first_part_time,
             second_part_time,
-            errors
+            errors,
+            switching
         )
 
 

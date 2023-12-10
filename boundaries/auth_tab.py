@@ -43,8 +43,10 @@ class AuthTab(QWidget):
         if self.create_window is None:
             self.create_window = RegisterWindow()
         self.create_window.exec()
+        self.create_window = None
 
     def login_form(self):
         if self.create_window is None:
             self.create_window = LoginWindow()
         self.create_window.exec()
+        self.create_window = None
