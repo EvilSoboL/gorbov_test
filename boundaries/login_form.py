@@ -4,6 +4,7 @@ from controllers.database import DataBaseHandler
 from controllers.gui_warnings import show_warning_messagebox, show_info_messagebox
 from controllers.gui_settings import menu_lines, menu_buttons
 from controllers.user import user
+from boundaries.test_tab import TestTab
 
 
 class LoginWindow(QDialog):
@@ -11,6 +12,7 @@ class LoginWindow(QDialog):
         super().__init__()
         self.setup_ui()
 
+        self.test_tab = TestTab()
         self.database = DataBaseHandler()
 
     def setup_ui(self):
@@ -51,12 +53,12 @@ class LoginWindow(QDialog):
             return
         user_id = self.database.login(self.login_field.text(), self.password_field.text())
         if user_id:
-            show_info_messagebox(f"Ваш id в системе: {user_id}")
-            user.authorized(user_id)
+            show_info_messagebox(f"Ваш id в системе: {user_id[0]}")
+            user.authorized(user_id[0])
+            self.test_tab.logic_switch("first_exec")
             self.clear_inputs()
         else:
             show_warning_messagebox("Логин или пароль не найден!")
-
 
     def clear_inputs(self):
         self.login_field.clear()

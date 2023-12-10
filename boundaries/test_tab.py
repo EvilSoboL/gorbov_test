@@ -7,6 +7,7 @@ from PyQt5.QtGui import QColor
 from controllers.gui_settings import Black, Red, Cell, menu_buttons
 from controllers.cells_generator import create_normalize_matrix
 from controllers.gui_warnings import show_info_messagebox
+from controllers.user import user
 
 
 class TestTab(QWidget):
@@ -34,6 +35,7 @@ class TestTab(QWidget):
 
         # Разметка окна
         self.setup_ui()
+        #self.logic_switch('first_exec')
 
     def setup_ui(self):
         # Сетка главного окна
@@ -79,8 +81,6 @@ class TestTab(QWidget):
         self.main_layout.addWidget(self.menu_widget, 7, 0, 7, 6)
         self.main_widget.setLayout(self.main_layout)
 
-        self.logic_switch("first_exec")
-
         self.setLayout(self.main_layout)
 
     def group_menu_buttons(self):
@@ -108,6 +108,9 @@ class TestTab(QWidget):
     def logic_switch(self, flag):
         """Вызов различных сценариев работы приложения"""
         if flag == "start":
+            if not user.is_authorized:
+                show_info_messagebox("Вам необходимо аутентифицироваться в системе!")
+                return
             self.count = 0
             self.random_button.setEnabled(False)
             self.start_button.setEnabled(False)
@@ -130,10 +133,11 @@ class TestTab(QWidget):
 
         elif flag == "reset":
             self.errors = 0
+        '''
+        elif flag == "first_exec":
+            self.start_button.setEnabled(True)
+        '''
 
-        #elif flag == "first_exec":
-            #if not self.chose_applicant_label.currentText():
-                #self.start_button.setEnabled(False)
 
     def shuffle_cells(self):
         """Перемешивание элементов теста"""
@@ -146,7 +150,7 @@ class TestTab(QWidget):
 
     def on_button_clicked(self, button_id):
         """Главный алгоритм теста"""
-        self.current_aplicant = self.chose_applicant_label.currentText()
+        #self.current_aplicant = self.chose_applicant_label.currentText()
 
         if self.first_part:
             if self.cells_group.button(button_id).initial_color == Black and self.cells_group.button(button_id).vl == self.fp:
