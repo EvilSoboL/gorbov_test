@@ -1,8 +1,9 @@
-from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton
+from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton, QCheckBox
 
 from controllers.database import DataBaseHandler
 from controllers.gui_warnings import show_warning_messagebox
 from controllers.gui_settings import menu_lines, menu_buttons
+from controllers.user import user
 
 
 class RegisterWindow(QDialog):
@@ -26,6 +27,8 @@ class RegisterWindow(QDialog):
         self.password_field = QLineEdit()
         self.password_field.setPlaceholderText("Пароль")
 
+        self.admin_checkbox = QCheckBox("Регистрация в качестве администратора")
+
         self.register_button = QPushButton("Зарегистрироваться")
         self.register_button.clicked.connect(self.register)
 
@@ -39,6 +42,7 @@ class RegisterWindow(QDialog):
 
         self.layout.addWidget(self.login_field)
         self.layout.addWidget(self.password_field)
+        self.layout.addWidget(self.admin_checkbox)
         self.layout.addWidget(self.register_button)
         self.layout.addWidget(self.exit_button)
 
@@ -48,8 +52,11 @@ class RegisterWindow(QDialog):
         if not self.login_field.text() or not self.password_field.text():
             show_warning_messagebox("Все поля должны быть заполнены!")
             return
-        self.database.register(self.login_field.text(), self.password_field.text())
-        self.clear_inputs()
+        elif self.agree_checkbox.isChecked():
+            self.database.register(self.login_field.text(), self.password_field.text(), 1)
+        else:
+            self.database.register(self.login_field.text(), self.password_field.text(), 0)
+        self.close()
 
     def clear_inputs(self):
         self.login_field.clear()

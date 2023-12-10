@@ -53,10 +53,10 @@ class LoginWindow(QDialog):
             return
         user_id = self.database.login(self.login_field.text(), self.password_field.text())
         if user_id:
-            show_info_messagebox(f"Ваш id в системе: {user_id[0]}")
+            show_info_messagebox('Вы успешно вошли в аккаунт!')
             user.authorized(user_id[0])
-            self.test_tab.logic_switch("first_exec")
             self.clear_inputs()
+            self.close()
         else:
             show_warning_messagebox("Логин или пароль не найден!")
 

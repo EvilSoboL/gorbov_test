@@ -8,13 +8,19 @@ class DataBaseHandler:
         self.connection = sqlite3.connect(self.db_path)
         self.cursor = self.connection.cursor()
 
-    def register(self, login, password):
+    def register(self, login, password, is_admin):
         with sqlite3.connect(self.db_path) as connection:
             cursor = connection.cursor()
-            cursor.execute(
-                'INSERT INTO "main"."users" (login, password) VALUES (?, ?)',
-                (login, password)
-            )
+            if is_admin:
+                cursor.execute(
+                    'INSERT INTO "main"."users" (login, password, role) VALUES (?, ?, ?)',
+                    (login, password, 1)
+                )
+            else:
+                cursor.execute(
+                    'INSERT INTO "main"."users" (login, password, role) VALUES (?, ?, ?)',
+                    (login, password, 0)
+                )
             connection.commit()
 
     def login(self, login, password):
