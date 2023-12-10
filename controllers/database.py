@@ -27,3 +27,12 @@ class DataBaseHandler:
             result = cursor.fetchone()
             connection.commit()
         return result
+
+    def insert_result(self, user_id, date, first_part, second_part, errors):
+        with sqlite3.connect(self.db_path) as connection:
+            cursor = connection.cursor()
+            cursor.execute('''
+                INSERT INTO "results" (user_id, date, first_part, second_part, errors)
+                VALUES (?, ?, ?, ?, ?)
+            ''', (user_id, date, first_part, second_part, errors))
+            connection.commit()

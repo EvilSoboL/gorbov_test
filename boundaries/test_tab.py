@@ -3,11 +3,13 @@ from PyQt5.QtCore import QTimer
 from PyQt5.QtGui import QFont
 from PyQt5.QtCore import Qt
 from PyQt5.QtGui import QColor
+from datetime import datetime
 
 from controllers.gui_settings import Black, Red, Cell, menu_buttons
 from controllers.cells_generator import create_normalize_matrix
 from controllers.gui_warnings import show_info_messagebox
 from controllers.user import user
+from entity.result import Result
 
 
 class TestTab(QWidget):
@@ -36,6 +38,7 @@ class TestTab(QWidget):
         # Разметка окна
         self.setup_ui()
         #self.logic_switch('first_exec')
+        self.result = Result()
 
     def setup_ui(self):
         # Сетка главного окна
@@ -224,11 +227,20 @@ class TestTab(QWidget):
                 self.second_part_time = (self.count/10) - self.first_part_time
                 self.timer_flag = False
                 self.third_part = False
-                #self.logic_switch("stop")
+                self.logic_switch("stop")
 
                 #profile = open(utility.ROOT_DIR + f"/data/{self.current_aplicant}.data", "a+")
+                date = datetime.now().date()
+
+                self.result.save_result(
+                    user.id,
+                    date,
+                    self.first_part_time,
+                    self.second_part_time,
+                    self.errors
+                )
                 #profile.write(f"{datetime.now().date()}\n{self.second_part_time - self.first_part_time}\n{self.errors-2}\n")
-                #self.logic_switch("reset")
+                self.logic_switch("reset")
 
     def show_time(self):
         if self.timer_flag:
