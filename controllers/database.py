@@ -55,3 +55,6 @@ class DataBaseHandler:
             result = cursor.fetchall()
             connection.commit()
         return result
+
+#db = DataBaseHandler()
+#db.register('ma', 'ma', 0)

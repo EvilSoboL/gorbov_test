@@ -52,7 +52,7 @@ class RegisterWindow(QDialog):
         if not self.login_field.text() or not self.password_field.text():
             show_warning_messagebox("Все поля должны быть заполнены!")
             return
-        elif self.agree_checkbox.isChecked():
+        elif self.admin_checkbox.isChecked():
             self.database.register(self.login_field.text(), self.password_field.text(), 1)
         else:
             self.database.register(self.login_field.text(), self.password_field.text(), 0)
