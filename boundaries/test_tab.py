@@ -57,7 +57,7 @@ class TestTab(QWidget):
         self.start_button.clicked.connect(lambda: None) #self.logic_switch("start")
 
         self.random_button = QPushButton("Перемешать ячейки")
-        self.random_button.clicked.connect(lambda: self.shuffle_cells)
+        self.random_button.clicked.connect(self.shuffle_cells)
 
         self.stop_button = QPushButton("Остановить тест")
         self.stop_button.clicked.connect(lambda: None) #lambda: self.logic_switch("stop")
