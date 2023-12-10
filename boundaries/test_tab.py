@@ -54,13 +54,13 @@ class TestTab(QWidget):
 
         # Кнопки меню
         self.start_button = QPushButton("Начать тест")
-        self.start_button.clicked.connect(lambda: None) #self.logic_switch("start")
+        self.start_button.clicked.connect(lambda: self.logic_switch("start"))
 
         self.random_button = QPushButton("Перемешать ячейки")
         self.random_button.clicked.connect(self.shuffle_cells)
 
         self.stop_button = QPushButton("Остановить тест")
-        self.stop_button.clicked.connect(lambda: None) #lambda: self.logic_switch("stop")
+        self.stop_button.clicked.connect(lambda: self.logic_switch("stop"))
 
         # Вёрстка таймера
         self.timer_label = QLabel("0:00")
@@ -79,7 +79,7 @@ class TestTab(QWidget):
         self.main_layout.addWidget(self.menu_widget, 7, 0, 7, 6)
         self.main_widget.setLayout(self.main_layout)
 
-        #self.logic_switch("first_exec")
+        self.logic_switch("first_exec")
 
         self.setLayout(self.main_layout)
 
@@ -111,9 +111,6 @@ class TestTab(QWidget):
             self.count = 0
             self.random_button.setEnabled(False)
             self.start_button.setEnabled(False)
-            self.create_applicant_button.setEnabled(False)
-            self.update_apllicant_button.setEnabled(False)
-            self.chose_applicant_label.setEnabled(False)
             self.first_part = True
             self.fp = 1
             self.sp = 24
@@ -122,9 +119,6 @@ class TestTab(QWidget):
         elif flag == "stop":
             self.start_button.setEnabled(True)
             self.random_button.setEnabled(True)
-            self.create_applicant_button.setEnabled(True)
-            self.update_apllicant_button.setEnabled(True)
-            self.chose_applicant_label.setEnabled(True)
             self.first_part = False
             self.second_part = False
             self.third_part = False
@@ -137,9 +131,9 @@ class TestTab(QWidget):
         elif flag == "reset":
             self.errors = 0
 
-        elif flag == "first_exec":
-            if not self.chose_applicant_label.currentText():
-                self.start_button.setEnabled(False)
+        #elif flag == "first_exec":
+            #if not self.chose_applicant_label.currentText():
+                #self.start_button.setEnabled(False)
 
     def shuffle_cells(self):
         """Перемешивание элементов теста"""

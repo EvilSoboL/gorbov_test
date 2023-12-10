@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QWidget, QVBoxLayout, QGridLayout, QButtonGroup, QPu
 
 from controllers.database import DataBaseHandler
 from boundaries.register_form import RegisterWindow
+from boundaries.login_form import LoginWindow
 
 
 class AuthTab(QWidget):
@@ -27,7 +28,7 @@ class AuthTab(QWidget):
         self.create_applicant_button.clicked.connect(lambda: self.registration_form())
 
         self.update_apllicant_button = QPushButton("Аутентифицироваться")
-        self.update_apllicant_button.clicked.connect(lambda: None)
+        self.update_apllicant_button.clicked.connect(lambda: self.login_form())
 
         self.menu_layout.addWidget(self.create_applicant_button, 0, 2)
         self.menu_layout.addWidget(self.update_apllicant_button, 1, 2)
@@ -41,4 +42,9 @@ class AuthTab(QWidget):
     def registration_form(self):
         if self.create_window is None:
             self.create_window = RegisterWindow()
+        self.create_window.exec()
+
+    def login_form(self):
+        if self.create_window is None:
+            self.create_window = LoginWindow()
         self.create_window.exec()

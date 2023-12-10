@@ -1,11 +1,11 @@
 from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton
 
 from controllers.database import DataBaseHandler
-from controllers.gui_warnings import show_warning_messagebox
+from controllers.gui_warnings import show_warning_messagebox, show_info_messagebox
 from controllers.gui_settings import menu_lines, menu_buttons
 
 
-class RegisterWindow(QDialog):
+class LoginWindow(QDialog):
     def __init__(self):
         super().__init__()
         self.setup_ui()
@@ -16,7 +16,7 @@ class RegisterWindow(QDialog):
         self.setGeometry(800, 400, 300, 300)
         self.setFixedSize(300, 300)
         self.setStyleSheet("background-color: rgb(200,200,200)")
-        self.setWindowTitle("Регистрация пользователя")
+        self.setWindowTitle("Аутентификация пользователя")
 
         self.layout = QVBoxLayout()
 
@@ -26,8 +26,8 @@ class RegisterWindow(QDialog):
         self.password_field = QLineEdit()
         self.password_field.setPlaceholderText("Пароль")
 
-        self.register_button = QPushButton("Зарегистрироваться")
-        self.register_button.clicked.connect(self.register)
+        self.register_button = QPushButton("Войти в аккаунт")
+        self.register_button.clicked.connect(self.login)
 
         self.exit_button = QPushButton("Выход")
         self.exit_button.clicked.connect(self.close)
@@ -44,12 +44,16 @@ class RegisterWindow(QDialog):
 
         self.setLayout(self.layout)
 
-    def register(self):
+    def login(self):
         if not self.login_field.text() or not self.password_field.text():
             show_warning_messagebox("Все поля должны быть заполнены!")
             return
-        self.database.register(self.login_field.text(), self.password_field.text())
-        self.clear_inputs()
+        user_id = self.database.login(self.login_field.text(), self.password_field.text())
+        if user_id:
+            show_info_messagebox(f"Ваш id в системе: {user_id}")
+            self.clear_inputs()
+        else:
+            show_warning_messagebox("Логин или пароль не найден!")
 
     def clear_inputs(self):
         self.login_field.clear()

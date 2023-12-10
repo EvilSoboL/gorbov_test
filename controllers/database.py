@@ -16,3 +16,14 @@ class DataBaseHandler:
                 (login, password)
             )
             connection.commit()
+
+    def login(self, login, password):
+        with sqlite3.connect(self.db_path) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                'SELECT id FROM "main"."users" WHERE login = ? AND password = ?;',
+                (login, password)
+            )
+            result = cursor.fetchone()
+            connection.commit()
+        return result
