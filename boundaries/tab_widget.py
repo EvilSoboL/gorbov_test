@@ -1,5 +1,6 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTabWidget
 from boundaries.auth_tab import AuthTab
+from boundaries.test_tab import TestTab
 
 
 class TabWidget(QWidget):
@@ -10,8 +11,10 @@ class TabWidget(QWidget):
         # Инициализация вкладок
         self.tabs = QTabWidget()
         self.auth_tab = AuthTab()
+        self.test_tab = TestTab()
 
         self.tabs.addTab(self.auth_tab, "Аутентификация")
+        self.tabs.addTab(self.test_tab, "Тестрирование")
 
         self.layout.addWidget(self.tabs)
         self.setLayout(self.layout)
