@@ -36,3 +36,19 @@ class DataBaseHandler:
                 VALUES (?, ?, ?, ?, ?)
             ''', (user_id, date, first_part, second_part, errors))
             connection.commit()
+
+    def get_results(self, user_id):
+        with sqlite3.connect(self.db_path) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                '''
+                SELECT * FROM "results" WHERE user_id = ?;
+                ''',
+                (user_id,)
+            )
+            result = cursor.fetchall()
+            connection.commit()
+        return result
+
+#db = DataBaseHandler()
+#print(db.get_results(2))

@@ -13,7 +13,7 @@ class AuthTab(QWidget):
 
         self.create_window = None
 
-        self.database = DataBaseHandler
+        self.database = DataBaseHandler()
 
     def setup_ui(self):
         self.main_layout = QGridLayout()
