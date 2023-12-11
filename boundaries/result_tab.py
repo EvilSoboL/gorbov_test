@@ -13,8 +13,6 @@ class ResultTab(QWidget):
         self.main_layout = QVBoxLayout()
         self.setup_ui()
 
-        #self.create_window = None
-
         self.database = DataBaseHandler()
 
     def setup_ui(self):
@@ -32,7 +30,10 @@ class ResultTab(QWidget):
         if not user.is_authorized:
             show_info_messagebox("Вам необходимо аутентифицироваться в системе!")
             return
-        result = self.database.get_results(user.id)
+        if user.is_admin:
+            result = self.database.get_admin_results()
+        else:
+            result = self.database.get_results(user.id)
         self.table_widget.setRowCount(len(result))
         self.table_widget.setColumnCount(len(result[0]))
 

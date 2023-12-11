@@ -27,7 +27,7 @@ class DataBaseHandler:
         with sqlite3.connect(self.db_path) as connection:
             cursor = connection.cursor()
             cursor.execute(
-                'SELECT id FROM "main"."users" WHERE login = ? AND password = ?;',
+                'SELECT id, role FROM "main"."users" WHERE login = ? AND password = ?;',
                 (login, password)
             )
             result = cursor.fetchone()
@@ -51,6 +51,18 @@ class DataBaseHandler:
                 SELECT * FROM "results" WHERE user_id = ?;
                 ''',
                 (user_id,)
+            )
+            result = cursor.fetchall()
+            connection.commit()
+        return result
+
+    def get_admin_results(self):
+        with sqlite3.connect(self.db_path) as connection:
+            cursor = connection.cursor()
+            cursor.execute(
+                '''
+                SELECT * FROM "results";
+                '''
             )
             result = cursor.fetchall()
             connection.commit()

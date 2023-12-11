@@ -51,14 +51,20 @@ class LoginWindow(QDialog):
         if not self.login_field.text() or not self.password_field.text():
             show_warning_messagebox("Все поля должны быть заполнены!")
             return
-        user_id = self.database.login(self.login_field.text(), self.password_field.text())
-        if user_id:
-            show_info_messagebox('Вы успешно вошли в аккаунт!')
-            user.authorized(user_id[0])
+        user_id, is_admin = self.database.login(self.login_field.text(), self.password_field.text())
+        if not (user_id, is_admin):
+            show_warning_messagebox("Логин или пароль не найдены!")
+        if is_admin:
+            show_info_messagebox('Вы успешно вошли в аккаунт как администратор!')
+            user.authorized(user_id, 1)
             self.clear_inputs()
             self.close()
+
         else:
-            show_warning_messagebox("Логин или пароль не найден!")
+            show_info_messagebox('Вы успешно вошли в аккаунт как тестируемый!')
+            user.authorized(user_id, 0)
+            self.clear_inputs()
+            self.close()
 
     def clear_inputs(self):
         self.login_field.clear()
