@@ -3,7 +3,7 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton
 from controllers.database import DataBaseHandler
 from controllers.gui_warnings import show_warning_messagebox, show_info_messagebox
 from controllers.gui_settings import menu_lines, menu_buttons
-from controllers.user import user
+from entity.user import user
 from boundaries.test_tab import TestTab
 
 

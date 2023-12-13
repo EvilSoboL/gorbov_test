@@ -1,9 +1,7 @@
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QTableWidget, QPushButton, QTableWidgetItem
 
 from controllers.database import DataBaseHandler
-from boundaries.register_form import RegisterWindow
-from boundaries.login_form import LoginWindow
-from controllers.user import user
+from entity.user import user
 from controllers.gui_warnings import show_info_messagebox
 
 

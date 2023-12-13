@@ -3,7 +3,6 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton, QCheck
 from controllers.database import DataBaseHandler
 from controllers.gui_warnings import show_warning_messagebox
 from controllers.gui_settings import menu_lines, menu_buttons
-from controllers.user import user
 
 
 class RegisterWindow(QDialog):

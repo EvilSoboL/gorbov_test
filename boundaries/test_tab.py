@@ -8,7 +8,7 @@ from datetime import datetime
 from controllers.gui_settings import Black, Red, Cell, menu_buttons
 from controllers.cells_generator import create_normalize_matrix
 from controllers.gui_warnings import show_info_messagebox
-from controllers.user import user
+from entity.user import user
 from entity.result import Result
 
 
@@ -147,9 +147,6 @@ class TestTab(QWidget):
         self.create_cells()
 
     def on_button_clicked(self, button_id):
-        """Главный алгоритм теста"""
-        #self.current_aplicant = self.chose_applicant_label.currentText()
-
         if self.first_part:
             if self.cells_group.button(button_id).initial_color == Black and self.cells_group.button(button_id).vl == self.fp:
                 if not self.timer_flag:
