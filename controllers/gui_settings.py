@@ -9,6 +9,28 @@ Red = "rgba(201, 44, 44, 1)"
 Red_initial = QColor(201, 44, 44)
 White = "rgba(255, 255, 255, 1)"
 
+register_button = """QPushButton {
+            background-color: green;
+            min-height: 30px;
+            min-width: 150px;
+            color: rgba(20, 20, 20, 1);
+            font-weight: 900;
+            border-radius: 200px;
+            }
+            QPushButton::hover {
+            background-color: rgba(150, 150, 150, 1);
+            border-radius: 20px;
+            }
+            QPushButton::pressed {
+            border: 2px solid rgba(110, 110, 110, 1);
+            border-radius: 20px;
+            }
+            QPushButton::disabled {
+            background-color: rgba(110, 110, 110, 1);
+            border-radius: 20px;
+            }"""
+
+
 black_default = """
 background-color: rgba(20, 20, 20, 1);
 max-height: 60px;

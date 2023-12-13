@@ -7,7 +7,7 @@ from boundaries.login_form import LoginWindow
 
 class AuthTab(QWidget):
     def __init__(self):
-        super(QWidget, self).__init__()
+        super().__init__()
         self.main_layout = QVBoxLayout()
         self.setup_ui()
 
@@ -24,14 +24,14 @@ class AuthTab(QWidget):
 
         self.menu_group = QButtonGroup()
 
-        self.create_applicant_button = QPushButton("Зарегистрироваться")
-        self.create_applicant_button.clicked.connect(lambda: self.registration_form())
+        self.registration_button = QPushButton("Зарегистрироваться")
+        self.registration_button.clicked.connect(lambda: self.registration_form())
 
-        self.update_apllicant_button = QPushButton("Аутентифицироваться")
-        self.update_apllicant_button.clicked.connect(lambda: self.login_form())
+        self.login_button = QPushButton("Аутентифицироваться")
+        self.login_button.clicked.connect(lambda: self.login_form())
 
-        self.menu_layout.addWidget(self.create_applicant_button, 0, 2)
-        self.menu_layout.addWidget(self.update_apllicant_button, 1, 2)
+        self.menu_layout.addWidget(self.registration_button, 0, 2)
+        self.menu_layout.addWidget(self.login_button, 1, 2)
 
         self.main_widget = QWidget()
         self.main_layout.addWidget(self.menu_widget, 7, 0, 7, 6)

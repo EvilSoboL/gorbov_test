@@ -18,7 +18,6 @@ class LoginWindow(QDialog):
     def setup_ui(self):
         self.setGeometry(800, 400, 300, 300)
         self.setFixedSize(300, 300)
-        self.setStyleSheet("background-color: rgb(200,200,200)")
         self.setWindowTitle("Аутентификация пользователя")
 
         self.layout = QVBoxLayout()
@@ -34,11 +33,6 @@ class LoginWindow(QDialog):
 
         self.exit_button = QPushButton("Выход")
         self.exit_button.clicked.connect(self.close)
-
-        self.login_field.setStyleSheet(menu_lines)
-        self.password_field.setStyleSheet(menu_lines)
-        self.register_button.setStyleSheet(menu_buttons)
-        self.exit_button.setStyleSheet(menu_buttons)
 
         self.layout.addWidget(self.login_field)
         self.layout.addWidget(self.password_field)

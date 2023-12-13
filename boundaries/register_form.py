@@ -2,7 +2,6 @@ from PyQt5.QtWidgets import QDialog, QVBoxLayout, QLineEdit, QPushButton, QCheck
 
 from controllers.database import DataBaseHandler
 from controllers.gui_warnings import show_warning_messagebox
-from controllers.gui_settings import menu_lines, menu_buttons
 
 
 class RegisterWindow(QDialog):
@@ -15,7 +14,6 @@ class RegisterWindow(QDialog):
     def setup_ui(self):
         self.setGeometry(800, 400, 300, 300)
         self.setFixedSize(300, 300)
-        self.setStyleSheet("background-color: rgb(200,200,200)")
         self.setWindowTitle("Регистрация пользователя")
 
         self.layout = QVBoxLayout()
@@ -33,11 +31,6 @@ class RegisterWindow(QDialog):
 
         self.exit_button = QPushButton("Выход")
         self.exit_button.clicked.connect(self.close)
-
-        self.login_field.setStyleSheet(menu_lines)
-        self.password_field.setStyleSheet(menu_lines)
-        self.register_button.setStyleSheet(menu_buttons)
-        self.exit_button.setStyleSheet(menu_buttons)
 
         self.layout.addWidget(self.login_field)
         self.layout.addWidget(self.password_field)

@@ -37,7 +37,6 @@ class TestTab(QWidget):
 
         # Разметка окна
         self.setup_ui()
-        #self.logic_switch('first_exec')
         self.result = Result()
 
     def setup_ui(self):
@@ -69,7 +68,7 @@ class TestTab(QWidget):
 
         # Вёрстка таймера
         self.timer_label = QLabel("0:00")
-        self.timer_label.setFont(QFont('Times', 30))
+        #self.timer_label.setFont(QFont('Times', 30))
         self.timer_label.setAlignment(Qt.AlignLeft)
 
         self.group_menu_buttons()
@@ -91,8 +90,8 @@ class TestTab(QWidget):
         self.menu_group.addButton(self.stop_button)
         self.menu_group.addButton(self.random_button)
 
-        for button in self.menu_group.buttons():
-            button.setStyleSheet(menu_buttons)
+        #for button in self.menu_group.buttons():
+            #button.setStyleSheet(menu_buttons)
 
     def create_cells(self):
         """ Создаём поле с черно-красными карточками в неслучайном случайном порядке"""
