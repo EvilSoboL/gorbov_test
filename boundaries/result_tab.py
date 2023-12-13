@@ -10,7 +10,7 @@ class ResultTab(QWidget):
         super(QWidget, self).__init__()
         self.main_layout = QVBoxLayout()
         self.setup_ui()
-        self.column_names = ['id испытуемого', 'Дата', 'Время прохождения первого сектора','Время прохождения второго сектора', 'Ошибки', 'Показатель переключения']
+        self.column_names = ['id испытуемого', 'Дата прохождения', 'Время прохождения первого сектора','Время прохождения второго сектора', 'Ошибки', 'Показатель переключения']
 
         self.database = DataBaseHandler()
 
@@ -33,7 +33,6 @@ class ResultTab(QWidget):
             result = self.database.get_admin_results()
         else:
             result = self.database.get_results(user.id)
-
 
         self.table_widget.setRowCount(len(result))
         self.table_widget.setColumnCount(len(result[0]))
