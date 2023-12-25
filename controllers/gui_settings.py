@@ -9,6 +9,7 @@ Red = "rgba(201, 44, 44, 1)"
 Red_initial = QColor(201, 44, 44)
 White = "rgba(255, 255, 255, 1)"
 
+
 register_button = """QPushButton {
             background-color: green;
             min-height: 30px;
